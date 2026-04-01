@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { StatCard } from './components/StatCard';
 import { BeneficiariesChart } from './components/BeneficiariesChart';
@@ -6,7 +7,79 @@ import { FinancialCorrelationCard } from './components/FinancialCorrelationCard'
 import { motion } from 'motion/react';
 import { Calendar, Target, Briefcase, Microscope } from 'lucide-react';
 
+type YearTab = 'YTD' | '2026' | '2027' | '2028';
+
+const yearData: Record<YearTab, {
+  beneficiaries: string;
+  capital: string;
+  hubs: string;
+  bootcamp: string;
+  youthCoding: string;
+  teacherTraining: string;
+  outreachGoal: number;
+  outreachTarget: string;
+  beneficiariesTrend: string;
+  capitalTrend: string;
+  label: string;
+}> = {
+  YTD: {
+    label: 'Q1 2026 (YTD)',
+    beneficiaries: '8,241',
+    capital: '$620K',
+    hubs: '09',
+    bootcamp: '124',
+    youthCoding: '7.2k',
+    teacherTraining: '98',
+    outreachGoal: 24,
+    outreachTarget: '35,000',
+    beneficiariesTrend: '+3.1%',
+    capitalTrend: '+2.0%',
+  },
+  '2026': {
+    label: 'Full Year 2026',
+    beneficiaries: '31,563',
+    capital: '$3.15M',
+    hubs: '09',
+    bootcamp: '457',
+    youthCoding: '28.9k',
+    teacherTraining: '456',
+    outreachGoal: 92,
+    outreachTarget: '35,000',
+    beneficiariesTrend: '+12.5%',
+    capitalTrend: '+8.2%',
+  },
+  '2027': {
+    label: 'Full Year 2027',
+    beneficiaries: '38,900',
+    capital: '$4.10M',
+    hubs: '11',
+    bootcamp: '612',
+    youthCoding: '35.1k',
+    teacherTraining: '590',
+    outreachGoal: 78,
+    outreachTarget: '50,000',
+    beneficiariesTrend: '+23.2%',
+    capitalTrend: '+30.2%',
+  },
+  '2028': {
+    label: 'Full Year 2028',
+    beneficiaries: '47,300',
+    capital: '$5.80M',
+    hubs: '14',
+    bootcamp: '810',
+    youthCoding: '43.6k',
+    teacherTraining: '740',
+    outreachGoal: 63,
+    outreachTarget: '75,000',
+    beneficiariesTrend: '+21.6%',
+    capitalTrend: '+41.5%',
+  },
+};
+
 export default function App() {
+  const [activeYear, setActiveYear] = useState<YearTab>('2026');
+  const data = yearData[activeYear];
+
   return (
     <div className="flex min-h-screen bg-white">
       {/* Navigation Sidebar */}
@@ -31,8 +104,25 @@ export default function App() {
                   </span>
                   <div className="flex items-center gap-2 text-gray-400 text-xs">
                     <Calendar className="w-3.5 h-3.5" />
-                    <span>Real-time data for Q1 2026</span>
+                    <span>{data.label}</span>
                   </div>
+                </div>
+
+                {/* Year Tabs */}
+                <div className="flex items-center gap-1 mb-6 p-1 bg-white border border-gray-100 rounded-xl w-fit shadow-sm">
+                  {(['YTD', '2026', '2027', '2028'] as YearTab[]).map((year) => (
+                    <button
+                      key={year}
+                      onClick={() => setActiveYear(year)}
+                      className={`px-5 py-2 rounded-lg text-sm font-semibold tracking-tight transition-all ${
+                        activeYear === year
+                          ? 'bg-[#0747A1] text-white shadow-md'
+                          : 'text-gray-400 hover:text-gray-700'
+                      }`}
+                    >
+                      {year}
+                    </button>
+                  ))}
                 </div>
                 <h1 className="text-4xl lg:text-5xl font-semibold text-gray-900 tracking-tight leading-[1.15] mb-6">
                   Driving measurable change <br />
@@ -59,21 +149,21 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <StatCard
                 label="Direct Beneficiaries"
-                value="31,563"
+                value={data.beneficiaries}
                 subtitle="Across 12 major programs"
-                trend="+12.5%"
+                trend={data.beneficiariesTrend}
                 variant="primary"
               />
               <StatCard
                 label="Capital Secured"
-                value="$3.15M"
+                value={data.capital}
                 subtitle="Since inception in 2018"
-                trend="+8.2%"
+                trend={data.capitalTrend}
                 variant="primary"
               />
               <StatCard
                 label="Innovation Hubs"
-                value="09"
+                value={data.hubs}
                 subtitle="Active operational centers"
                 variant="primary"
               />
@@ -92,19 +182,19 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <StatCard
                 label="Bootcamp Program"
-                value="457"
+                value={data.bootcamp}
                 subtitle="Full-time students enrolled"
                 variant="secondary"
               />
               <StatCard
                 label="Youth Coding"
-                value="28.9k"
+                value={data.youthCoding}
                 subtitle="Primary & Secondary reach"
                 variant="secondary"
               />
               <StatCard
                 label="Teacher Training"
-                value="456"
+                value={data.teacherTraining}
                 subtitle="Certified educators"
                 variant="secondary"
               />
@@ -116,11 +206,11 @@ export default function App() {
                   <span className="text-sm font-bold text-[#0747A1] uppercase tracking-[1px]">Outreach Goal</span>
                 </div>
                 <div className="flex items-baseline justify-between mb-2">
-                  <span className="text-2xl font-bold text-[#0747A1]">92%</span>
-                  <span className="text-xs text-gray-500 font-medium">Goal: 35,000</span>
+                  <span className="text-2xl font-bold text-[#0747A1]">{data.outreachGoal}%</span>
+                  <span className="text-xs text-gray-500 font-medium">Goal: {data.outreachTarget}</span>
                 </div>
                 <div className="w-full bg-white rounded-full h-2 overflow-hidden border border-[#0747A1]/10">
-                  <div className="bg-[#0747A1] h-full rounded-full w-[92%]" />
+                  <div className="bg-[#0747A1] h-full rounded-full transition-all duration-700" style={{ width: `${data.outreachGoal}%` }} />
                 </div>
               </div>
             </div>
