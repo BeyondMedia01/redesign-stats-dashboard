@@ -1,10 +1,10 @@
 import { Sidebar } from './components/Sidebar';
 import { StatCard } from './components/StatCard';
 import { BeneficiariesChart } from './components/BeneficiariesChart';
-import { DemographicCard } from './components/DemographicCard';
+import { FinancialCorrelationCard } from './components/FinancialCorrelationCard';
 import { ActionButtons } from './components/ActionButtons';
 import { motion } from 'motion/react';
-import { Download, Share2, Calendar, Target, Briefcase, GraduationCap, Microscope } from 'lucide-react';
+import { Download, Share2, Calendar, Target, Briefcase, GraduationCap } from 'lucide-react';
 
 export default function App() {
   return (
@@ -141,61 +141,58 @@ export default function App() {
             <BeneficiariesChart />
           </section>
 
-          {/* Strategic Demographics */}
+          {/* Financial & Impact Correlation */}
           <section className="mb-20">
             <div className="flex items-center justify-between mb-10">
               <div className="flex items-center gap-3">
                 <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
-                <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Strategic Demographics</h2>
+                <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Financial & Impact Correlation</h2>
               </div>
               <div className="flex gap-2">
-                <FilterChip label="Gender" active />
-                <FilterChip label="Age" />
-                <FilterChip label="Location" />
+                <FilterChip label="Program" active />
+                <FilterChip label="Quarter" />
+                <FilterChip label="Region" />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-              <DemographicCard
-                program="Bootcamp Students"
-                averageAge={21}
-                malePercent={45}
-                femalePercent={55}
+              <FinancialCorrelationCard
+                program="Bootcamp Program"
+                capitalInvested="$820K"
+                beneficiaries={457}
+                costPerBeneficiary="$1,795"
+                efficiency={82}
               />
-              <DemographicCard
+              <FinancialCorrelationCard
                 program="Youth Coding"
-                averageAge={16}
-                malePercent={48}
-                femalePercent={52}
+                capitalInvested="$1.2M"
+                beneficiaries={28900}
+                costPerBeneficiary="$42"
+                efficiency={95}
               />
-              <DemographicCard
+              <FinancialCorrelationCard
                 program="Teacher Training"
-                averageAge={34}
-                malePercent={35}
-                femalePercent={65}
+                capitalInvested="$430K"
+                beneficiaries={456}
+                costPerBeneficiary="$943"
+                efficiency={74}
               />
-              
-              {/* Visual Impact Box */}
+
+              {/* Summary Impact Box */}
               <div className="bg-gradient-to-br from-[#0747A1] to-[#0a5ac7] rounded-xl p-8 text-white relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-10 opacity-10 -rotate-12 transition-transform group-hover:scale-110 group-hover:rotate-0 duration-700">
-                  <Microscope className="w-40 h-40" />
+                  <Briefcase className="w-40 h-40" />
                 </div>
                 <div className="relative z-10 flex flex-col h-full justify-between">
                   <div>
-                    <h4 className="text-xl font-bold mb-3 tracking-tight">Social Impact Hubs</h4>
+                    <h4 className="text-xl font-bold mb-3 tracking-tight">Total Capital ROI</h4>
                     <p className="text-blue-50/80 text-sm leading-relaxed mb-8 max-w-[200px]">
-                      9 strategic hubs fostering innovation in under-served communities.
+                      $3.15M deployed across all programs since inception in 2018.
                     </p>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className="flex -space-x-3">
-                       {[1,2,3,4].map(i => (
-                         <div key={i} className="w-10 h-10 rounded-full border-2 border-[#0747A1] bg-blue-400/50 flex items-center justify-center text-[10px] font-bold">
-                           {i}
-                         </div>
-                       ))}
-                    </div>
-                    <span className="text-xs font-semibold uppercase tracking-widest text-blue-100">Global Hubs</span>
+                  <div>
+                    <div className="text-3xl font-bold mb-1">$99</div>
+                    <span className="text-xs font-semibold uppercase tracking-widest text-blue-100">Avg. cost per beneficiary</span>
                   </div>
                 </div>
               </div>
