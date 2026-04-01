@@ -1,0 +1,12 @@
+@import url('https://fonts.cdnfonts.com/css/avenir-next-lt-pro');
+
+/* Avenir Next font family definitions */
+:root {
+  --font-avenir: 'Avenir Next LT Pro', 'Avenir Next', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@layer base {
+  * {
+    font-family: var(--font-avenir);
+  }
+}

@@ -1,0 +1,17 @@
+# Node modules
+node_modules/
+
+# Production build
+dist/
+
+# Environment variables
+.env
+.env.local
+
+# IDE & OS files
+.DS_Store
+.vscode/
+.idea/
+
+# Vite
+*.log
