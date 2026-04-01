@@ -7,7 +7,7 @@ import { FinancialCorrelationCard } from './components/FinancialCorrelationCard'
 import { motion } from 'motion/react';
 import { Calendar, Target, Briefcase, Microscope } from 'lucide-react';
 
-type YearTab = 'YTD' | '2026' | '2027' | '2028';
+type YearTab = 'YTD' | '2026' | '2025' | '2024' | '2023' | '2022' | '2021' | '2020' | '2019' | '2018';
 
 const yearData: Record<YearTab, {
   beneficiaries: string;
@@ -48,31 +48,109 @@ const yearData: Record<YearTab, {
     beneficiariesTrend: '+12.5%',
     capitalTrend: '+8.2%',
   },
-  '2027': {
-    label: 'Full Year 2027',
-    beneficiaries: '38,900',
-    capital: '$4.10M',
-    hubs: '11',
-    bootcamp: '612',
-    youthCoding: '35.1k',
-    teacherTraining: '590',
-    outreachGoal: 78,
-    outreachTarget: '50,000',
-    beneficiariesTrend: '+23.2%',
-    capitalTrend: '+30.2%',
+  '2025': {
+    label: 'Full Year 2025',
+    beneficiaries: '26,840',
+    capital: '$2.72M',
+    hubs: '09',
+    bootcamp: '398',
+    youthCoding: '24.1k',
+    teacherTraining: '390',
+    outreachGoal: 87,
+    outreachTarget: '31,000',
+    beneficiariesTrend: '+14.1%',
+    capitalTrend: '+10.6%',
   },
-  '2028': {
-    label: 'Full Year 2028',
-    beneficiaries: '47,300',
-    capital: '$5.80M',
-    hubs: '14',
-    bootcamp: '810',
-    youthCoding: '43.6k',
-    teacherTraining: '740',
+  '2024': {
+    label: 'Full Year 2024',
+    beneficiaries: '21,200',
+    capital: '$2.18M',
+    hubs: '08',
+    bootcamp: '320',
+    youthCoding: '19.3k',
+    teacherTraining: '310',
+    outreachGoal: 81,
+    outreachTarget: '26,000',
+    beneficiariesTrend: '+18.2%',
+    capitalTrend: '+15.3%',
+  },
+  '2023': {
+    label: 'Full Year 2023',
+    beneficiaries: '16,400',
+    capital: '$1.72M',
+    hubs: '07',
+    bootcamp: '245',
+    youthCoding: '14.8k',
+    teacherTraining: '240',
+    outreachGoal: 76,
+    outreachTarget: '21,500',
+    beneficiariesTrend: '+22.4%',
+    capitalTrend: '+19.4%',
+  },
+  '2022': {
+    label: 'Full Year 2022',
+    beneficiaries: '11,900',
+    capital: '$1.30M',
+    hubs: '06',
+    bootcamp: '178',
+    youthCoding: '10.6k',
+    teacherTraining: '175',
+    outreachGoal: 70,
+    outreachTarget: '17,000',
+    beneficiariesTrend: '+28.1%',
+    capitalTrend: '+23.8%',
+  },
+  '2021': {
+    label: 'Full Year 2021',
+    beneficiaries: '8,300',
+    capital: '$940K',
+    hubs: '05',
+    bootcamp: '130',
+    youthCoding: '7.4k',
+    teacherTraining: '120',
     outreachGoal: 63,
-    outreachTarget: '75,000',
-    beneficiariesTrend: '+21.6%',
-    capitalTrend: '+41.5%',
+    outreachTarget: '13,200',
+    beneficiariesTrend: '+31.7%',
+    capitalTrend: '+29.2%',
+  },
+  '2020': {
+    label: 'Full Year 2020',
+    beneficiaries: '5,400',
+    capital: '$640K',
+    hubs: '04',
+    bootcamp: '88',
+    youthCoding: '4.7k',
+    teacherTraining: '82',
+    outreachGoal: 54,
+    outreachTarget: '10,000',
+    beneficiariesTrend: '+20.0%',
+    capitalTrend: '+18.5%',
+  },
+  '2019': {
+    label: 'Full Year 2019',
+    beneficiaries: '3,800',
+    capital: '$420K',
+    hubs: '03',
+    bootcamp: '62',
+    youthCoding: '3.3k',
+    teacherTraining: '55',
+    outreachGoal: 48,
+    outreachTarget: '8,000',
+    beneficiariesTrend: '+90.0%',
+    capitalTrend: '+75.0%',
+  },
+  '2018': {
+    label: 'Inception Year 2018',
+    beneficiaries: '2,000',
+    capital: '$240K',
+    hubs: '02',
+    bootcamp: '30',
+    youthCoding: '1.8k',
+    teacherTraining: '28',
+    outreachGoal: 40,
+    outreachTarget: '5,000',
+    beneficiariesTrend: '—',
+    capitalTrend: '—',
   },
 };
 
@@ -110,7 +188,7 @@ export default function App() {
 
                 {/* Year Tabs */}
                 <div className="flex items-center gap-1 mb-6 p-1 bg-white border border-gray-100 rounded-xl w-fit shadow-sm">
-                  {(['YTD', '2026', '2027', '2028'] as YearTab[]).map((year) => (
+                  {(['YTD', '2026', '2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018'] as YearTab[]).map((year) => (
                     <button
                       key={year}
                       onClick={() => setActiveYear(year)}
