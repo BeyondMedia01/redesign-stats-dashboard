@@ -3,7 +3,6 @@ import { StatCard } from './components/StatCard';
 import { BeneficiariesChart } from './components/BeneficiariesChart';
 import { DemographicCard } from './components/DemographicCard';
 import { FinancialCorrelationCard } from './components/FinancialCorrelationCard';
-import { ActionButtons } from './components/ActionButtons';
 import { motion } from 'motion/react';
 import { Calendar, Target, Briefcase, Microscope } from 'lucide-react';
 
@@ -251,17 +250,6 @@ export default function App() {
             </div>
           </section>
 
-          {/* Footer Actions */}
-          <footer className="pt-12 border-t border-gray-100 mt-20">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-              <div className="flex items-center gap-8">
-                <FooterLink label="Privacy Policy" />
-                <FooterLink label="Terms of Service" />
-                <FooterLink label="Data Ethics" />
-              </div>
-              <ActionButtons />
-            </div>
-          </footer>
         </div>
       </main>
     </div>
@@ -279,13 +267,5 @@ function FilterChip({ label, active = false }: { label: string; active?: boolean
     `}>
       {label}
     </button>
-  );
-}
-
-function FooterLink({ label }: { label: string }) {
-  return (
-    <a href="#" className="text-xs text-gray-400 hover:text-[#0747A1] transition-colors font-medium">
-      {label}
-    </a>
   );
 }
