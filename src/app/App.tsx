@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { Routes, Route } from 'react-router';
 import { Sidebar } from './components/Sidebar';
 import { StatCard } from './components/StatCard';
 import { BeneficiariesChart } from './components/BeneficiariesChart';
 import { DemographicCard } from './components/DemographicCard';
 import { FinancialCorrelationCard } from './components/FinancialCorrelationCard';
+import ProgramPage from './pages/ProgramPage';
 import { motion } from 'motion/react';
 import { Calendar, Target, Briefcase, Microscope } from 'lucide-react';
 
@@ -154,13 +156,12 @@ const yearData: Record<YearTab, {
   },
 };
 
-export default function App() {
+function Dashboard() {
   const [activeYear, setActiveYear] = useState<YearTab>('2026');
   const data = yearData[activeYear];
 
   return (
     <div className="flex min-h-screen bg-white">
-      {/* Navigation Sidebar */}
       <Sidebar />
       
       {/* Main Impact Dashboard */}
@@ -424,12 +425,21 @@ export default function App() {
   );
 }
 
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/programs/:slug" element={<ProgramPage />} />
+    </Routes>
+  );
+}
+
 function FilterChip({ label, active = false }: { label: string; active?: boolean }) {
   return (
     <button className={`
       px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all
-      ${active 
-        ? 'bg-[#0747A1] text-white shadow-md' 
+      ${active
+        ? 'bg-[#0747A1] text-white shadow-md'
         : 'bg-white text-gray-500 border border-gray-100 hover:border-gray-200'
       }
     `}>
