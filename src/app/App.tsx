@@ -5,7 +5,7 @@ import { DemographicCard } from './components/DemographicCard';
 import { FinancialCorrelationCard } from './components/FinancialCorrelationCard';
 import { ActionButtons } from './components/ActionButtons';
 import { motion } from 'motion/react';
-import { Download, Share2, Calendar, Target, Briefcase, GraduationCap, Microscope } from 'lucide-react';
+import { Calendar, Target, Briefcase, Microscope } from 'lucide-react';
 
 export default function App() {
   return (
@@ -45,16 +45,6 @@ export default function App() {
                 </p>
               </motion.div>
               
-              <div className="flex items-center gap-3">
-                <button className="hidden sm:flex items-center gap-2 px-5 py-3 rounded-lg border border-gray-100 bg-white text-gray-600 hover:bg-gray-50 transition-all shadow-sm">
-                  <Share2 className="w-4 h-4" />
-                  <span className="text-sm font-medium tracking-tight">Share Impact</span>
-                </button>
-                <button className="flex items-center gap-3 px-8 py-4 bg-[#0747A1] text-white rounded-lg font-medium hover:bg-[#063b87] transition-all shadow-xl shadow-blue-900/10 hover:-translate-y-0.5">
-                  <Download className="w-4 h-4" />
-                  <span className="tracking-tight">Generate Report</span>
-                </button>
-              </div>
             </div>
           </header>
 
