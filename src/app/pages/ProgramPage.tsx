@@ -129,37 +129,46 @@ export default function ProgramPage() {
 
           {/* Header */}
           <header className="mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <span className="px-3 py-1 bg-[#0747A1]/5 text-[#0747A1] text-[10px] font-bold uppercase tracking-[2px] rounded-full border border-[#0747A1]/10">
-                  Program Overview
-                </span>
-                <div className="flex items-center gap-2 text-gray-400 text-xs">
-                  <Calendar className="w-3.5 h-3.5" />
-                  <span>{activeYear === 'YTD' ? 'Q1 2026 (YTD)' : `Full Year ${activeYear}`}</span>
+            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-10">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="px-3 py-1 bg-[#0747A1]/5 text-[#0747A1] text-[10px] font-bold uppercase tracking-[2px] rounded-full border border-[#0747A1]/10">
+                    Program Overview
+                  </span>
+                  <div className="flex items-center gap-2 text-gray-400 text-xs">
+                    <Calendar className="w-3.5 h-3.5" />
+                    <span>{activeYear === 'YTD' ? 'Q1 2026 (YTD)' : `Full Year ${activeYear}`}</span>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start gap-5 mb-6">
-                <div className="p-4 bg-[#0747A1] rounded-xl text-white shrink-0">
-                  {program.icon}
+                <div className="flex items-start gap-5">
+                  <div className="p-4 bg-[#0747A1] rounded-xl text-white shrink-0">
+                    {program.icon}
+                  </div>
+                  <div>
+                    <h1 className="text-4xl lg:text-5xl font-semibold text-gray-900 tracking-tight leading-tight mb-3">
+                      {program.title}
+                    </h1>
+                    <p className="text-gray-500 text-lg leading-relaxed max-w-2xl">
+                      {program.description}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h1 className="text-4xl lg:text-5xl font-semibold text-gray-900 tracking-tight leading-tight mb-3">
-                    {program.title}
-                  </h1>
-                  <p className="text-gray-500 text-lg leading-relaxed max-w-2xl">
-                    {program.description}
-                  </p>
-                </div>
-              </div>
+              </motion.div>
 
-              <YearTabs activeYear={activeYear} onChange={setActiveYear} />
-            </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="lg:pt-1 shrink-0"
+              >
+                <YearTabs activeYear={activeYear} onChange={setActiveYear} />
+              </motion.div>
+            </div>
           </header>
 
           {/* KPI Stats */}
