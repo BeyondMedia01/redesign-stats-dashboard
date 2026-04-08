@@ -6,8 +6,9 @@ import { BeneficiariesChart } from './components/BeneficiariesChart';
 import { DemographicCard } from './components/DemographicCard';
 import { FinancialCorrelationCard } from './components/FinancialCorrelationCard';
 import ProgramPage from './pages/ProgramPage';
+import CommunityPage from './pages/CommunityPage';
 import { motion } from 'motion/react';
-import { Calendar, Target, Briefcase, Microscope } from 'lucide-react';
+import { Calendar, Target, Briefcase, Microscope, TrendingUp, Award, Users2, MapPin, Star, CheckCircle2 } from 'lucide-react';
 
 type YearTab = 'YTD' | '2026' | '2025' | '2024' | '2023' | '2022' | '2021' | '2020' | '2019' | '2018';
 
@@ -430,6 +431,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Dashboard />} />
       <Route path="/programs/:slug" element={<ProgramPage />} />
+      <Route path="/communities/:slug" element={<CommunityPage />} />
     </Routes>
   );
 }

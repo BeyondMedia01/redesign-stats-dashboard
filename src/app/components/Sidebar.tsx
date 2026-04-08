@@ -21,11 +21,11 @@ export function Sidebar() {
   const location = useLocation();
   const programs = ['Bootcamp', 'Youth Coding', 'Teacher Training', 'Outreach'];
   const communities = [
-    'Dzivarasekwa',
-    'Kuwadzana',
-    'Mufakose',
-    'Warren Park',
-    'Kambuzuma',
+    { label: 'Dzivarasekwa', slug: 'dzivarasekwa' },
+    { label: 'Kuwadzana', slug: 'kuwadzana' },
+    { label: 'Mufakose', slug: 'mufakose' },
+    { label: 'Warren Park', slug: 'warren-park' },
+    { label: 'Kambuzuma', slug: 'kambuzuma' },
   ];
 
   return (
@@ -95,13 +95,18 @@ export function Sidebar() {
         <div>
           <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-[2px] mb-4 px-4">Communities</h3>
           <div className="space-y-1">
-            {communities.map((community) => (
-              <NavItem
-                key={community}
-                icon={<MapPin className="w-4 h-4" />}
-                label={community}
-              />
-            ))}
+            {communities.map(({ label, slug }) => {
+              const path = `/communities/${slug}`;
+              return (
+                <NavItem
+                  key={slug}
+                  to={path}
+                  icon={<MapPin className="w-4 h-4" />}
+                  label={label}
+                  active={location.pathname === path}
+                />
+              );
+            })}
           </div>
         </div>
       </nav>
