@@ -544,21 +544,14 @@ function Dashboard() {
                   </div>
                   <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Geographic Reach</span>
                 </div>
-                <div className="text-5xl font-bold text-gray-900 mb-2">5 + 3</div>
-                <p className="text-sm text-gray-500 mb-6">Active hubs + communities in pipeline</p>
+                <div className="text-5xl font-bold text-gray-900 mb-2">9</div>
+                <p className="text-sm text-gray-500 mb-6">Active community hubs across Zimbabwe</p>
                 <div className="space-y-2 mb-4">
-                  {['Dzivarasekwa', 'Kuwadzana', 'Mufakose', 'Warren Park', 'Kambuzuma'].map((c) => (
+                  {['Kuwadzana', 'Kambuzuma', 'Vincent Bohlen', 'Mufakose', 'Jafuta', 'Emganwini', 'Dzivarasekwa', 'Warren Park', 'Mbare'].map((c) => (
                     <div key={c} className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-[#0747A1]" />
                       <span className="text-sm text-gray-700">{c}</span>
                       <span className="ml-auto text-[10px] font-semibold text-green-700 bg-green-50 px-2 py-0.5 rounded-full">Active</span>
-                    </div>
-                  ))}
-                  {['Highfield', 'Glen Norah', 'Chitungwiza'].map((c) => (
-                    <div key={c} className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-gray-300" />
-                      <span className="text-sm text-gray-400">{c}</span>
-                      <span className="ml-auto text-[10px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">Pipeline</span>
                     </div>
                   ))}
                 </div>

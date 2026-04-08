@@ -63,6 +63,34 @@ const communityYearStats: Record<string, Partial<Record<YearTab, YearStats>>> = 
     '2024': { beneficiaries: '1,100', activeStudents: '84',  stat3: '6', beneficiariesTrend: '+61.8%' },
     '2023': { beneficiaries: '680',   activeStudents: '52',  stat3: '4', beneficiariesTrend: '—' },
   },
+  'vincent-bohlen': {
+    YTD:   { beneficiaries: '310',   activeStudents: '98',  stat3: '12', beneficiariesTrend: '+7.2%' },
+    '2026': { beneficiaries: '1,420', activeStudents: '98',  stat3: '12', beneficiariesTrend: '+29.1%' },
+    '2025': { beneficiaries: '1,100', activeStudents: '76',  stat3: '9',  beneficiariesTrend: '+34.1%' },
+    '2024': { beneficiaries: '820',   activeStudents: '58',  stat3: '6',  beneficiariesTrend: '+51.9%' },
+    '2023': { beneficiaries: '540',   activeStudents: '38',  stat3: '3',  beneficiariesTrend: '—' },
+  },
+  jafuta: {
+    YTD:   { beneficiaries: '280',   activeStudents: '86',  stat3: '5', beneficiariesTrend: '+8.5%' },
+    '2026': { beneficiaries: '1,240', activeStudents: '86',  stat3: '5', beneficiariesTrend: '+32.8%' },
+    '2025': { beneficiaries: '934',   activeStudents: '64',  stat3: '4', beneficiariesTrend: '+35.2%' },
+    '2024': { beneficiaries: '690',   activeStudents: '44',  stat3: '2', beneficiariesTrend: '—' },
+  },
+  emganwini: {
+    YTD:   { beneficiaries: '340',   activeStudents: '110', stat3: '14', beneficiariesTrend: '+6.8%' },
+    '2026': { beneficiaries: '1,580', activeStudents: '110', stat3: '14', beneficiariesTrend: '+26.4%' },
+    '2025': { beneficiaries: '1,250', activeStudents: '88',  stat3: '10', beneficiariesTrend: '+31.6%' },
+    '2024': { beneficiaries: '950',   activeStudents: '66',  stat3: '7',  beneficiariesTrend: '+40.7%' },
+    '2023': { beneficiaries: '675',   activeStudents: '44',  stat3: '4',  beneficiariesTrend: '—' },
+  },
+  mbare: {
+    YTD:   { beneficiaries: '420',   activeStudents: '128', stat3: '18', beneficiariesTrend: '+5.9%' },
+    '2026': { beneficiaries: '2,180', activeStudents: '128', stat3: '18', beneficiariesTrend: '+22.5%' },
+    '2025': { beneficiaries: '1,780', activeStudents: '104', stat3: '14', beneficiariesTrend: '+25.4%' },
+    '2024': { beneficiaries: '1,420', activeStudents: '82',  stat3: '10', beneficiariesTrend: '+28.8%' },
+    '2023': { beneficiaries: '1,102', activeStudents: '62',  stat3: '6',  beneficiariesTrend: '+46.9%' },
+    '2022': { beneficiaries: '750',   activeStudents: '44',  stat3: '3',  beneficiariesTrend: '—' },
+  },
 };
 
 const communityData: Record<string, {
@@ -202,6 +230,98 @@ const communityData: Record<string, {
     outcomes: {
       employment6mo: 58, completionRate: 76,
       incomeChangePct: 310, incomeBefore: '$2.8K', incomeAfter: '$11.5K', followUp2yr: 52,
+    },
+  },
+  'vincent-bohlen': {
+    title: 'Vincent Bohlen',
+    description: 'A Victoria Falls community hub bringing digital skills training to one of Zimbabwe\'s key tourism regions, creating new economic pathways for young people.',
+    stat3Label: 'Teachers Trained',
+    stat3Subtitle: 'Certified educators',
+    foundedYear: 2023,
+    about: 'Vincent Bohlen is our first hub in the Victoria Falls region. It focuses on equipping youth with digital skills that open doors beyond the tourism economy, building long-term resilience in the community.',
+    programs: ['Bootcamp Program', 'Youth Coding', 'Outreach'],
+    highlights: ['First hub in Victoria Falls region', 'Strong youth employment focus', 'Tourism-sector employer partnerships', 'Growing female enrolment'],
+    demographics: {
+      malePercent: 47, femalePercent: 53, avgAge: 20,
+      ageGroups: [
+        { label: '13–17', pct: 30 },
+        { label: '18–24', pct: 48 },
+        { label: '25–34', pct: 16 },
+        { label: '35+',   pct: 6 },
+      ],
+    },
+    outcomes: {
+      employment6mo: 66, completionRate: 79,
+      incomeChangePct: 390, incomeBefore: '$2.8K', incomeAfter: '$13.7K', followUp2yr: 60,
+    },
+  },
+  jafuta: {
+    title: 'Jafuta',
+    description: 'A Vic Falls community hub serving a rural-adjacent population with limited prior access to technology education.',
+    stat3Label: 'Schools Partnered',
+    stat3Subtitle: 'Active school integrations',
+    foundedYear: 2024,
+    about: 'Jafuta is our youngest hub, established in 2024 in the greater Victoria Falls area. It is focused primarily on youth digital literacy and school integration, with early indicators showing strong community appetite for tech education.',
+    programs: ['Youth Coding', 'Outreach'],
+    highlights: ['Established in 2024', 'Focus on rural digital access', 'School-first delivery model', 'Strong community leadership buy-in'],
+    demographics: {
+      malePercent: 52, femalePercent: 48, avgAge: 16,
+      ageGroups: [
+        { label: '13–17', pct: 58 },
+        { label: '18–24', pct: 30 },
+        { label: '25–34', pct: 10 },
+        { label: '35+',   pct: 2 },
+      ],
+    },
+    outcomes: {
+      employment6mo: 54, completionRate: 74,
+      incomeChangePct: 280, incomeBefore: '$2.6K', incomeAfter: '$9.9K', followUp2yr: 48,
+    },
+  },
+  emganwini: {
+    title: 'Emganwini',
+    description: 'A Bulawayo community hub expanding our footprint into Zimbabwe\'s second city, delivering coding education to a high-density urban population.',
+    stat3Label: 'Teachers Trained',
+    stat3Subtitle: 'Certified educators',
+    foundedYear: 2023,
+    about: 'Emganwini marks our expansion into Bulawayo, Zimbabwe\'s second-largest city. The hub serves a dense urban community with strong demand for digital skills, and has quickly built school and employer partnerships across the city.',
+    programs: ['Bootcamp Program', 'Youth Coding', 'Teacher Training', 'Outreach'],
+    highlights: ['First hub in Bulawayo', 'Rapid school partnership growth', 'Employer network in Bulawayo CBD', 'High female teacher representation'],
+    demographics: {
+      malePercent: 42, femalePercent: 58, avgAge: 23,
+      ageGroups: [
+        { label: '13–17', pct: 24 },
+        { label: '18–24', pct: 44 },
+        { label: '25–34', pct: 24 },
+        { label: '35+',   pct: 8 },
+      ],
+    },
+    outcomes: {
+      employment6mo: 70, completionRate: 81,
+      incomeChangePct: 410, incomeBefore: '$3.0K', incomeAfter: '$15.3K', followUp2yr: 64,
+    },
+  },
+  mbare: {
+    title: 'Mbare',
+    description: 'One of Harare\'s most populous and historically underserved suburbs, where our hub is delivering significant economic impact through tech education.',
+    stat3Label: 'Teachers Trained',
+    stat3Subtitle: 'Certified educators',
+    foundedYear: 2022,
+    about: 'Mbare is one of the oldest and most densely populated suburbs in Harare. Our hub here addresses deep-rooted youth unemployment through intensive coding training, teacher development, and strong community outreach.',
+    programs: ['Bootcamp Program', 'Youth Coding', 'Teacher Training', 'Outreach'],
+    highlights: ['High-density urban reach', 'Strong bootcamp graduate outcomes', 'Active community radio presence', 'Growing corporate sponsor network'],
+    demographics: {
+      malePercent: 45, femalePercent: 55, avgAge: 22,
+      ageGroups: [
+        { label: '13–17', pct: 26 },
+        { label: '18–24', pct: 46 },
+        { label: '25–34', pct: 20 },
+        { label: '35+',   pct: 8 },
+      ],
+    },
+    outcomes: {
+      employment6mo: 72, completionRate: 83,
+      incomeChangePct: 430, incomeBefore: '$3.1K', incomeAfter: '$16.4K', followUp2yr: 67,
     },
   },
 };

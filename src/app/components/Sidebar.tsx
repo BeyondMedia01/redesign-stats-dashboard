@@ -21,11 +21,15 @@ export function Sidebar() {
   const location = useLocation();
   const programs = ['Bootcamp', 'Youth Coding', 'Teacher Training', 'Outreach'];
   const communities = [
-    { label: 'Dzivarasekwa', slug: 'dzivarasekwa' },
     { label: 'Kuwadzana', slug: 'kuwadzana' },
-    { label: 'Mufakose', slug: 'mufakose' },
-    { label: 'Warren Park', slug: 'warren-park' },
     { label: 'Kambuzuma', slug: 'kambuzuma' },
+    { label: 'Vincent Bohlen', slug: 'vincent-bohlen' },
+    { label: 'Mufakose', slug: 'mufakose' },
+    { label: 'Jafuta', slug: 'jafuta' },
+    { label: 'Emganwini', slug: 'emganwini' },
+    { label: 'Dzivarasekwa', slug: 'dzivarasekwa' },
+    { label: 'Warren Park', slug: 'warren-park' },
+    { label: 'Mbare', slug: 'mbare' },
   ];
 
   return (
