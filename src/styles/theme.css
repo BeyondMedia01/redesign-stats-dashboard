@@ -22,9 +22,9 @@
   --input: #e5e7eb;
   --input-background: #ffffff;
   --switch-background: #d1d5db;
-  --font-weight-medium: 500;
+  --font-weight-medium: 600;
   --font-weight-normal: 400;
-  --font-weight-bold: 700;
+  --font-weight-bold: 600;
   --ring: #0747A1;
   --chart-1: #0747A1;
   --chart-2: #60A5FA;
@@ -78,7 +78,7 @@
 }
 
 @theme inline {
-  --font-sans: 'Avenir Next LT Pro';
+  --font-sans: var(--font-uncommon);
   --color-brand: #0747A1;
   --color-brand-muted: rgba(7, 71, 161, 0.1);
   --color-background: var(--background);
@@ -124,16 +124,16 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    font-family: 'Avenir Next LT Pro' !important;
+    font-family: var(--font-uncommon) !important;
   }
 
   html {
-    font-family: 'Avenir Next LT Pro';
+    font-family: var(--font-uncommon);
   }
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Avenir Next LT Pro';
+    font-family: var(--font-uncommon);
   }
 
 
