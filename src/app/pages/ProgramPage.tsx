@@ -202,48 +202,52 @@ export default function ProgramPage() {
           </section>
 
           {/* About + Highlights */}
-          <section className="mb-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="bg-white rounded-xl p-8 border border-gray-100">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
-                  <h2 className="text-lg font-semibold text-gray-900 tracking-tight">About this Program</h2>
+          {slug !== 'youth-coding' && (
+            <section className="mb-16">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="bg-white rounded-xl p-8 border border-gray-100">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
+                    <h2 className="text-lg font-semibold text-gray-900 tracking-tight">About this Program</h2>
+                  </div>
+                  <p className="text-gray-600 leading-relaxed">{program.about}</p>
                 </div>
-                <p className="text-gray-600 leading-relaxed">{program.about}</p>
-              </div>
 
-              <div className="bg-white rounded-xl p-8 border border-gray-100">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
-                  <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Program Highlights</h2>
+                <div className="bg-white rounded-xl p-8 border border-gray-100">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
+                    <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Program Highlights</h2>
+                  </div>
+                  <ul className="space-y-3">
+                    {program.highlights.map((h) => (
+                      <li key={h} className="flex items-center gap-3">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#0747A1] shrink-0" />
+                        <span className="text-gray-600 text-sm">{h}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-3">
-                  {program.highlights.map((h) => (
-                    <li key={h} className="flex items-center gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#0747A1] shrink-0" />
-                      <span className="text-gray-600 text-sm">{h}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
-            </div>
-          </section>
+            </section>
+          )}
 
           {/* Communities */}
-          <section className="mb-16">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
-              <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Active Communities</h2>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              {program.communities.map((c) => (
-                <div key={c} className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-100 rounded-lg">
-                  <Target className="w-3.5 h-3.5 text-[#0747A1]" />
-                  <span className="text-sm text-gray-700 font-medium">{c}</span>
-                </div>
-              ))}
-            </div>
-          </section>
+          {slug !== 'youth-coding' && (
+            <section className="mb-16">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
+                <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Active Communities</h2>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                {program.communities.map((c) => (
+                  <div key={c} className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-100 rounded-lg">
+                    <Target className="w-3.5 h-3.5 text-[#0747A1]" />
+                    <span className="text-sm text-gray-700 font-medium">{c}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Youth Coding — exclusive sections */}
           {slug === 'youth-coding' && (
