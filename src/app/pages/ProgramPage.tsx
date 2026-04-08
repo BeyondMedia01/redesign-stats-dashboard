@@ -7,6 +7,7 @@ import type { YearTab } from '../components/YearTabs';
 import { motion } from 'motion/react';
 import { BookOpen, Users, TrendingUp, GraduationCap, Calendar, Target, MapPin, User, UserCheck, MapPinned, GraduationCap as GradIcon } from 'lucide-react';
 import { SchoolPerformanceTable } from '../components/SchoolPerformanceTable';
+import { BootcampEnrollmentChart } from '../components/BootcampEnrollmentChart';
 
 type ProgramStats = { label: string; value: string; subtitle: string; trend?: string };
 
@@ -200,6 +201,9 @@ export default function ProgramPage() {
               </div>
             )}
           </section>
+
+          {/* Bootcamp — Enrollment Chart */}
+          {slug === 'bootcamp' && <BootcampEnrollmentChart />}
 
           {/* About + Highlights */}
           {slug !== 'youth-coding' && (
