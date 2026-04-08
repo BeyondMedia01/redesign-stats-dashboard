@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useParams } from 'react-router';
 import { Sidebar } from '../components/Sidebar';
 import { StatCard } from '../components/StatCard';
 import { YearTabs, CURRENT_YEAR } from '../components/YearTabs';
 import type { YearTab } from '../components/YearTabs';
 import { motion } from 'motion/react';
-import { BookOpen, Users, TrendingUp, GraduationCap, Calendar, Target, MapPin, User, UserCheck, MapPinned, GraduationCap as GradIcon, Trophy } from 'lucide-react';
+import { BookOpen, Users, TrendingUp, GraduationCap, Calendar, Target, MapPin, User, UserCheck, MapPinned, GraduationCap as GradIcon } from 'lucide-react';
+import { SchoolPerformanceTable } from '../components/SchoolPerformanceTable';
 
 type ProgramStats = { label: string; value: string; subtitle: string; trend?: string };
 
@@ -353,49 +354,7 @@ export default function ProgramPage() {
               </section>
 
               {/* School Performance */}
-              <section className="mb-16">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
-                  <h2 className="text-lg font-semibold text-gray-900 tracking-tight">School Performance</h2>
-                  <span className="text-xs text-gray-400 font-medium">by Project Completions</span>
-                </div>
-                <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
-                  <div className="grid grid-cols-12 px-6 py-3 border-b border-gray-50 bg-gray-50/50">
-                    <span className="col-span-1 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Rank</span>
-                    <span className="col-span-5 text-[10px] font-bold text-gray-400 uppercase tracking-widest">School</span>
-                    <span className="col-span-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest text-right">Students</span>
-                    <span className="col-span-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest text-right">Projects</span>
-                  </div>
-                  {[
-                    { rank: 1, school: 'Gwinyiro Primary School', students: 152, projects: 259 },
-                    { rank: 2, school: 'Kuwadzana 2 Primary', students: 138, projects: 224 },
-                    { rank: 3, school: 'Dzivarasekwa Primary', students: 121, projects: 198 },
-                    { rank: 4, school: 'Mufakose High School', students: 109, projects: 176 },
-                    { rank: 5, school: 'Warren Park Primary', students: 94, projects: 150 },
-                  ].map(({ rank, school, students, projects }, i) => (
-                    <div key={school} className={`grid grid-cols-12 px-6 py-4 items-center ${i < 4 ? 'border-b border-gray-50' : ''}`}>
-                      <div className="col-span-1">
-                        {rank === 1 ? (
-                          <div className="w-6 h-6 rounded-full bg-[#0747A1] flex items-center justify-center">
-                            <Trophy className="w-3 h-3 text-white" />
-                          </div>
-                        ) : (
-                          <span className="text-sm font-bold text-gray-400">#{rank}</span>
-                        )}
-                      </div>
-                      <div className="col-span-5">
-                        <span className="text-sm font-medium text-gray-700">{school}</span>
-                      </div>
-                      <div className="col-span-3 text-right">
-                        <span className="text-sm font-semibold text-gray-600">{students}</span>
-                      </div>
-                      <div className="col-span-3 text-right">
-                        <span className="text-sm font-bold text-[#0747A1]">{projects}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
+              <SchoolPerformanceTable />
 
               {/* Outcomes — Survey Results */}
               <section className="mb-16">
