@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router';
 import { Sidebar } from './components/Sidebar';
 import { StatCard } from './components/StatCard';
 import { BeneficiariesChart } from './components/BeneficiariesChart';
+import { SpacesMap } from './components/SpacesMap';
 import { DemographicCard } from './components/DemographicCard';
 import { FinancialCorrelationCard } from './components/FinancialCorrelationCard';
 import { YearTabs, CURRENT_YEAR } from './components/YearTabs';
@@ -603,6 +604,8 @@ function Dashboard() {
             </div>
           </section>
 
+         
+
           {/* Strategic Demographics */}
           <section className="mb-20">
             <div className="flex items-center justify-between mb-10">
@@ -664,6 +667,18 @@ function Dashboard() {
             <BeneficiariesChart />
           </section>
 
+
+ {/* Uncommon Spaces Map */}
+          <section className="mb-20">
+            <div className="flex items-center justify-between mb-10">
+              <div className="flex items-center gap-3">
+                <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
+                <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Uncommon Spaces</h2>
+              </div>
+              <span className="text-xs text-gray-400 font-medium">4 active locations · Zimbabwe</span>
+            </div>
+            <SpacesMap />
+          </section>
         </div>
       </main>
     </div>
