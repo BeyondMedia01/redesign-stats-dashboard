@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router';
 import { Sidebar } from './components/Sidebar';
 import { StatCard } from './components/StatCard';
 import { BeneficiariesChart } from './components/BeneficiariesChart';
+import { SpacesMap } from './components/SpacesMap';
 import { DemographicCard } from './components/DemographicCard';
 import { FinancialCorrelationCard } from './components/FinancialCorrelationCard';
 import { YearTabs, CURRENT_YEAR } from './components/YearTabs';
@@ -171,8 +172,8 @@ function Dashboard() {
           
           {/* Top Header & Actions */}
           <header className="mb-20">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10">
-              <motion.div 
+            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-10">
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
@@ -187,21 +188,24 @@ function Dashboard() {
                     <span>{data.label}</span>
                   </div>
                 </div>
-
-                {/* Year Tabs */}
-                <div className="mb-6">
-                  <YearTabs activeYear={activeYear} onChange={setActiveYear} />
-                </div>
                 <h1 className="text-4xl lg:text-5xl font-semibold text-gray-900 tracking-tight leading-[1.15] mb-6">
                   Driving measurable change <br />
                   <span className="text-[#0747A1]">through sustainable</span> innovation.
                 </h1>
                 <p className="text-gray-500 text-lg leading-relaxed max-w-xl">
-                  Evaluate the real-time impact across all programs and hubs. 
+                  Evaluate the real-time impact across all programs and hubs.
                   Providing high-level transparency into our core performance metrics.
                 </p>
               </motion.div>
-              
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="lg:pt-1 shrink-0"
+              >
+                <YearTabs activeYear={activeYear} onChange={setActiveYear} />
+              </motion.div>
             </div>
           </header>
 
@@ -600,6 +604,8 @@ function Dashboard() {
             </div>
           </section>
 
+         
+
           {/* Strategic Demographics */}
           <section className="mb-20">
             <div className="flex items-center justify-between mb-10">
@@ -661,6 +667,18 @@ function Dashboard() {
             <BeneficiariesChart />
           </section>
 
+
+ {/* Uncommon Spaces Map */}
+          <section className="mb-20">
+            <div className="flex items-center justify-between mb-10">
+              <div className="flex items-center gap-3">
+                <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
+                <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Uncommon Spaces</h2>
+              </div>
+              <span className="text-xs text-gray-400 font-medium">4 active locations · Zimbabwe</span>
+            </div>
+            <SpacesMap />
+          </section>
         </div>
       </main>
     </div>
