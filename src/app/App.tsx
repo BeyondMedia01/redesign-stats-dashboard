@@ -420,6 +420,276 @@ function Dashboard() {
             </div>
           </section>
 
+          {/* Outcomes & Sustainability */}
+          <section className="mb-20">
+            <div className="flex items-center justify-between mb-10">
+              <div className="flex items-center gap-3">
+                <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
+                <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Outcomes & Sustainability</h2>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-6">
+              {/* Employment at 6–12 months */}
+              <div className="bg-white rounded-xl p-6 border border-gray-100">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-2 bg-[#0747A1]/5 rounded-lg">
+                    <TrendingUp className="w-4 h-4 text-[#0747A1]" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Employment 6–12 Months</span>
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">71%</div>
+                <p className="text-xs text-gray-500 mb-3">Still employed in tech roles 6–12 months post-graduation</p>
+                <div className="flex items-center gap-2 text-xs text-amber-600 bg-amber-50 rounded-lg px-3 py-2">
+                  <span>vs. 78% at graduation — 7pt drop tracked</span>
+                </div>
+              </div>
+
+              {/* Income change */}
+              <div className="bg-white rounded-xl p-6 border border-gray-100">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-2 bg-[#0747A1]/5 rounded-lg">
+                    <Award className="w-4 h-4 text-[#0747A1]" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Income Change</span>
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">+464%</div>
+                <p className="text-xs text-gray-500 mb-3">Average income growth after program completion</p>
+                <div className="flex justify-between text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2">
+                  <span>Before: <strong className="text-gray-700">$3.2K/yr</strong></span>
+                  <span>→</span>
+                  <span>After: <strong className="text-[#0747A1]">$18K/yr</strong></span>
+                </div>
+              </div>
+
+              {/* Completion rate */}
+              <div className="bg-white rounded-xl p-6 border border-gray-100">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-2 bg-[#0747A1]/5 rounded-lg">
+                    <CheckCircle2 className="w-4 h-4 text-[#0747A1]" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Completion Rate</span>
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">84%</div>
+                <p className="text-xs text-gray-500 mb-3">Students who complete the full 6-month curriculum</p>
+                <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+                  <div className="bg-[#0747A1] h-full rounded-full" style={{ width: '84%' }} />
+                </div>
+                <p className="text-xs text-gray-400 mt-2">16% dropout — tracked & supported</p>
+              </div>
+
+              {/* Long-term follow-up */}
+              <div className="bg-white rounded-xl p-6 border border-gray-100">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-2 bg-[#0747A1]/5 rounded-lg">
+                    <Users2 className="w-4 h-4 text-[#0747A1]" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Long-term Follow-up</span>
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">68%</div>
+                <p className="text-xs text-gray-500 mb-3">Graduates still in tech employment at 2-year mark</p>
+                <div className="space-y-1.5">
+                  <div className="flex justify-between text-xs text-gray-500">
+                    <span>1-year cohort tracked</span>
+                    <strong className="text-gray-700">1,240 grads</strong>
+                  </div>
+                  <div className="flex justify-between text-xs text-gray-500">
+                    <span>2-year cohort tracked</span>
+                    <strong className="text-gray-700">820 grads</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Program Quality */}
+          <section className="mb-20">
+            <div className="flex items-center justify-between mb-10">
+              <div className="flex items-center gap-3">
+                <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
+                <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Program Quality</h2>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* NPS */}
+              <div className="bg-white rounded-xl p-8 border border-gray-100">
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="p-2 bg-[#0747A1]/5 rounded-lg">
+                    <Star className="w-4 h-4 text-[#0747A1]" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Net Promoter Score</span>
+                </div>
+                <div className="text-5xl font-bold text-[#0747A1] mb-2">72</div>
+                <p className="text-sm text-gray-500 mb-6">Participant satisfaction score — <strong className="text-gray-700">World class (&gt;70)</strong></p>
+                <div className="space-y-2">
+                  {[
+                    { label: 'Promoters', pct: 78, color: 'bg-[#0747A1]' },
+                    { label: 'Passives', pct: 16, color: 'bg-gray-300' },
+                    { label: 'Detractors', pct: 6, color: 'bg-red-200' },
+                  ].map(({ label, pct, color }) => (
+                    <div key={label} className="flex items-center gap-3">
+                      <span className="text-xs text-gray-500 w-20 shrink-0">{label}</span>
+                      <div className="flex-1 bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                        <div className={`${color} h-full rounded-full`} style={{ width: `${pct}%` }} />
+                      </div>
+                      <span className="text-xs font-semibold text-gray-700 w-8 text-right">{pct}%</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Accreditation */}
+              <div className="bg-white rounded-xl p-8 border border-gray-100">
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="p-2 bg-[#0747A1]/5 rounded-lg">
+                    <Award className="w-4 h-4 text-[#0747A1]" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Accreditation Status</span>
+                </div>
+                <div className="space-y-4">
+                  {[
+                    { body: 'Ministry of ICT, Zimbabwe', status: 'Accredited', year: '2021' },
+                    { body: 'ZIMSEC Curriculum Alignment', status: 'Accredited', year: '2022' },
+                    { body: 'African Union Skills Framework', status: 'In Review', year: '2026' },
+                    { body: 'CompTIA Partnership', status: 'Accredited', year: '2023' },
+                  ].map(({ body, status, year }) => (
+                    <div key={body} className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-medium text-gray-800">{body}</p>
+                        <p className="text-xs text-gray-400">Since {year}</p>
+                      </div>
+                      <span className={`shrink-0 text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full ${
+                        status === 'Accredited' ? 'bg-green-50 text-green-700' : 'bg-amber-50 text-amber-700'
+                      }`}>
+                        {status}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Mentor ratio */}
+              <div className="bg-white rounded-xl p-8 border border-gray-100">
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="p-2 bg-[#0747A1]/5 rounded-lg">
+                    <Users2 className="w-4 h-4 text-[#0747A1]" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Mentor-to-Student Ratio</span>
+                </div>
+                <div className="text-5xl font-bold text-[#0747A1] mb-2">1:8</div>
+                <p className="text-sm text-gray-500 mb-6">One mentor per 8 students across all cohorts</p>
+                <div className="space-y-3">
+                  {[
+                    { program: 'Bootcamp', ratio: '1:8', active: 57 },
+                    { program: 'Youth Coding', ratio: '1:14', active: 64 },
+                    { program: 'Teacher Training', ratio: '1:6', active: 76 },
+                  ].map(({ program, ratio, active }) => (
+                    <div key={program} className="flex items-center justify-between text-sm">
+                      <span className="text-gray-600">{program}</span>
+                      <div className="flex items-center gap-3">
+                        <span className="font-semibold text-gray-900">{ratio}</span>
+                        <span className="text-xs text-gray-400">{active} mentors</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Scale & Reach */}
+          <section className="mb-20">
+            <div className="flex items-center justify-between mb-10">
+              <div className="flex items-center gap-3">
+                <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
+                <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Scale & Reach</h2>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Waitlist / Unmet Demand */}
+              <div className="bg-white rounded-xl p-8 border border-gray-100">
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="p-2 bg-amber-50 rounded-lg">
+                    <CheckCircle2 className="w-4 h-4 text-amber-600" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Waitlist / Unmet Demand</span>
+                </div>
+                <div className="text-5xl font-bold text-gray-900 mb-2">1,240</div>
+                <p className="text-sm text-gray-500 mb-6">Qualified applicants awaiting program placement</p>
+                <div className="space-y-3">
+                  {[
+                    { label: 'Bootcamp', count: 520 },
+                    { label: 'Youth Coding', count: 480 },
+                    { label: 'Teacher Training', count: 240 },
+                  ].map(({ label, count }) => (
+                    <div key={label} className="flex items-center justify-between text-sm">
+                      <span className="text-gray-600">{label}</span>
+                      <span className="font-semibold text-amber-600">{count} waiting</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-4 text-xs text-amber-700 bg-amber-50 rounded-lg px-3 py-2">
+                  Unmet demand represents opportunity for expanded funding
+                </div>
+              </div>
+
+              {/* New vs. Returning */}
+              <div className="bg-white rounded-xl p-8 border border-gray-100">
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="p-2 bg-[#0747A1]/5 rounded-lg">
+                    <Users2 className="w-4 h-4 text-[#0747A1]" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">New vs. Returning Beneficiaries</span>
+                </div>
+                <div className="flex items-end gap-4 mb-6">
+                  <div>
+                    <div className="text-4xl font-bold text-[#0747A1]">82%</div>
+                    <p className="text-xs text-gray-500 mt-1">New beneficiaries</p>
+                  </div>
+                  <div className="pb-1">
+                    <div className="text-2xl font-bold text-gray-400">18%</div>
+                    <p className="text-xs text-gray-500 mt-1">Returning</p>
+                  </div>
+                </div>
+                <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden flex">
+                  <div className="bg-[#0747A1] h-full" style={{ width: '82%' }} />
+                  <div className="bg-gray-300 h-full flex-1" />
+                </div>
+                <p className="text-xs text-gray-400 mt-3">Reach is expanding — 82% first-time beneficiaries confirms real growth, not recirculation</p>
+              </div>
+
+              {/* Geographic Reach */}
+              <div className="bg-white rounded-xl p-8 border border-gray-100">
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="p-2 bg-[#0747A1]/5 rounded-lg">
+                    <MapPin className="w-4 h-4 text-[#0747A1]" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Geographic Reach</span>
+                </div>
+                <div className="text-5xl font-bold text-gray-900 mb-2">5 + 3</div>
+                <p className="text-sm text-gray-500 mb-6">Active hubs + communities in pipeline</p>
+                <div className="space-y-2 mb-4">
+                  {['Dzivarasekwa', 'Kuwadzana', 'Mufakose', 'Warren Park', 'Kambuzuma'].map((c) => (
+                    <div key={c} className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-[#0747A1]" />
+                      <span className="text-sm text-gray-700">{c}</span>
+                      <span className="ml-auto text-[10px] font-semibold text-green-700 bg-green-50 px-2 py-0.5 rounded-full">Active</span>
+                    </div>
+                  ))}
+                  {['Highfield', 'Glen Norah', 'Chitungwiza'].map((c) => (
+                    <div key={c} className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-gray-300" />
+                      <span className="text-sm text-gray-400">{c}</span>
+                      <span className="ml-auto text-[10px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">Pipeline</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
         </div>
       </main>
     </div>
