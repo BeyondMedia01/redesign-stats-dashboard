@@ -3,8 +3,6 @@ import {
   LayoutDashboard,
   BookOpen,
   MapPin,
-  Settings,
-  HelpCircle,
   TrendingUp,
   Users
 } from 'lucide-react';
@@ -115,21 +113,6 @@ export function Sidebar() {
         </div>
       </nav>
 
-      {/* Footer Nav */}
-      <div className="p-6 border-t border-gray-50 bg-gray-50/30">
-        <div className="space-y-1">
-          <NavItem
-            icon={<Settings className="w-4 h-4" />}
-            label="Settings"
-            small
-          />
-          <NavItem
-            icon={<HelpCircle className="w-4 h-4" />}
-            label="Support"
-            small
-          />
-        </div>
-      </div>
     </aside>
   );
 }
