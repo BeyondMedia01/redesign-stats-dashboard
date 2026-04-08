@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Routes, Route } from 'react-router';
 import { Sidebar } from './components/Sidebar';
 import { StatCard } from './components/StatCard';
@@ -84,7 +84,7 @@ const yearData: Record<YearTab, {
     hubs: '07',
     bootcamp: '245',
     youthCoding: '14.8k',
-    teacherTraining: '240',
+    teacherTraining: '—',
     outreachGoal: 76,
     outreachTarget: '21,500',
     beneficiariesTrend: '+22.4%',
@@ -97,7 +97,7 @@ const yearData: Record<YearTab, {
     hubs: '06',
     bootcamp: '178',
     youthCoding: '10.6k',
-    teacherTraining: '175',
+    teacherTraining: '—',
     outreachGoal: 70,
     outreachTarget: '17,000',
     beneficiariesTrend: '+28.1%',
@@ -110,7 +110,7 @@ const yearData: Record<YearTab, {
     hubs: '05',
     bootcamp: '130',
     youthCoding: '7.4k',
-    teacherTraining: '120',
+    teacherTraining: '—',
     outreachGoal: 63,
     outreachTarget: '13,200',
     beneficiariesTrend: '+31.7%',
@@ -123,7 +123,7 @@ const yearData: Record<YearTab, {
     hubs: '04',
     bootcamp: '88',
     youthCoding: '4.7k',
-    teacherTraining: '82',
+    teacherTraining: '—',
     outreachGoal: 54,
     outreachTarget: '10,000',
     beneficiariesTrend: '+20.0%',
@@ -136,7 +136,7 @@ const yearData: Record<YearTab, {
     hubs: '03',
     bootcamp: '62',
     youthCoding: '3.3k',
-    teacherTraining: '55',
+    teacherTraining: '—',
     outreachGoal: 48,
     outreachTarget: '8,000',
     beneficiariesTrend: '+90.0%',
@@ -149,7 +149,7 @@ const yearData: Record<YearTab, {
     hubs: '02',
     bootcamp: '30',
     youthCoding: '1.8k',
-    teacherTraining: '28',
+    teacherTraining: '—',
     outreachGoal: 40,
     outreachTarget: '5,000',
     beneficiariesTrend: '—',
@@ -157,9 +157,26 @@ const yearData: Record<YearTab, {
   },
 };
 
+const CURRENT_YEAR: YearTab = '2026';
+const HISTORICAL_YEARS: YearTab[] = ['2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018'];
+
 function Dashboard() {
-  const [activeYear, setActiveYear] = useState<YearTab>('2026');
+  const [activeYear, setActiveYear] = useState<YearTab>(CURRENT_YEAR);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const data = yearData[activeYear];
+
+  const isHistorical = HISTORICAL_YEARS.includes(activeYear);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <div className="flex min-h-screen bg-white">
@@ -190,19 +207,61 @@ function Dashboard() {
 
                 {/* Year Tabs */}
                 <div className="flex items-center gap-1 mb-6 p-1 bg-white border border-gray-100 rounded-xl w-fit shadow-sm">
-                  {(['YTD', '2026', '2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018'] as YearTab[]).map((year) => (
+                  {/* YTD tab */}
+                  <button
+                    onClick={() => setActiveYear('YTD')}
+                    className={`px-5 py-2 rounded-lg text-sm font-semibold tracking-tight transition-all ${
+                      activeYear === 'YTD'
+                        ? 'bg-[#0747A1] text-white shadow-md'
+                        : 'text-gray-400 hover:text-gray-700'
+                    }`}
+                  >
+                    YTD
+                  </button>
+
+                  {/* Current year tab with dropdown */}
+                  <div ref={dropdownRef} className="relative">
                     <button
-                      key={year}
-                      onClick={() => setActiveYear(year)}
-                      className={`px-5 py-2 rounded-lg text-sm font-semibold tracking-tight transition-all ${
-                        activeYear === year
+                      onClick={() => {
+                        if (!isHistorical) setActiveYear(CURRENT_YEAR);
+                        setDropdownOpen((o) => !o);
+                      }}
+                      className={`flex items-center gap-1.5 px-5 py-2 rounded-lg text-sm font-semibold tracking-tight transition-all ${
+                        activeYear !== 'YTD'
                           ? 'bg-[#0747A1] text-white shadow-md'
                           : 'text-gray-400 hover:text-gray-700'
                       }`}
                     >
-                      {year}
+                      {isHistorical ? activeYear : CURRENT_YEAR}
+                      <svg className="w-3 h-3 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
                     </button>
-                  ))}
+
+                    {dropdownOpen && (
+                      <div className="absolute left-0 top-full mt-1 bg-white border border-gray-100 rounded-xl shadow-lg z-50 min-w-[100px] py-1 overflow-hidden">
+                        <button
+                          onClick={() => { setActiveYear(CURRENT_YEAR); setDropdownOpen(false); }}
+                          className={`w-full text-left px-4 py-2 text-sm font-medium transition-colors ${
+                            activeYear === CURRENT_YEAR ? 'text-[#0747A1] bg-[#0747A1]/5' : 'text-gray-600 hover:bg-gray-50'
+                          }`}
+                        >
+                          {CURRENT_YEAR}
+                        </button>
+                        {HISTORICAL_YEARS.map((year) => (
+                          <button
+                            key={year}
+                            onClick={() => { setActiveYear(year); setDropdownOpen(false); }}
+                            className={`w-full text-left px-4 py-2 text-sm font-medium transition-colors ${
+                              activeYear === year ? 'text-[#0747A1] bg-[#0747A1]/5' : 'text-gray-600 hover:bg-gray-50'
+                            }`}
+                          >
+                            {year}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <h1 className="text-4xl lg:text-5xl font-semibold text-gray-900 tracking-tight leading-[1.15] mb-6">
                   Driving measurable change <br />
@@ -275,7 +334,7 @@ function Dashboard() {
               <StatCard
                 label="Teacher Training"
                 value={data.teacherTraining}
-                subtitle="Certified educators"
+                subtitle={data.teacherTraining === '—' ? 'Program not yet active' : 'Certified educators'}
                 variant="secondary"
               />
               <div className="p-6 bg-[#0747A1]/5 border border-[#0747A1]/10 rounded-xl flex flex-col justify-center">
