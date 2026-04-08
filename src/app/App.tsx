@@ -1,16 +1,16 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { Routes, Route } from 'react-router';
 import { Sidebar } from './components/Sidebar';
 import { StatCard } from './components/StatCard';
 import { BeneficiariesChart } from './components/BeneficiariesChart';
 import { DemographicCard } from './components/DemographicCard';
 import { FinancialCorrelationCard } from './components/FinancialCorrelationCard';
+import { YearTabs, CURRENT_YEAR } from './components/YearTabs';
+import type { YearTab } from './components/YearTabs';
 import ProgramPage from './pages/ProgramPage';
 import CommunityPage from './pages/CommunityPage';
 import { motion } from 'motion/react';
 import { Calendar, Target, Briefcase, Microscope, TrendingUp, Award, Users2, MapPin, Star, CheckCircle2 } from 'lucide-react';
-
-type YearTab = 'YTD' | '2026' | '2025' | '2024' | '2023' | '2022' | '2021' | '2020' | '2019' | '2018';
 
 const yearData: Record<YearTab, {
   beneficiaries: string;
@@ -157,26 +157,9 @@ const yearData: Record<YearTab, {
   },
 };
 
-const CURRENT_YEAR: YearTab = '2026';
-const HISTORICAL_YEARS: YearTab[] = ['2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018'];
-
 function Dashboard() {
   const [activeYear, setActiveYear] = useState<YearTab>(CURRENT_YEAR);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const data = yearData[activeYear];
-
-  const isHistorical = HISTORICAL_YEARS.includes(activeYear);
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setDropdownOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   return (
     <div className="flex min-h-screen bg-white">
@@ -206,62 +189,8 @@ function Dashboard() {
                 </div>
 
                 {/* Year Tabs */}
-                <div className="flex items-center gap-1 mb-6 p-1 bg-white border border-gray-100 rounded-xl w-fit shadow-sm">
-                  {/* YTD tab */}
-                  <button
-                    onClick={() => setActiveYear('YTD')}
-                    className={`px-5 py-2 rounded-lg text-sm font-semibold tracking-tight transition-all ${
-                      activeYear === 'YTD'
-                        ? 'bg-[#0747A1] text-white shadow-md'
-                        : 'text-gray-400 hover:text-gray-700'
-                    }`}
-                  >
-                    YTD
-                  </button>
-
-                  {/* Current year tab with dropdown */}
-                  <div ref={dropdownRef} className="relative">
-                    <button
-                      onClick={() => {
-                        if (!isHistorical) setActiveYear(CURRENT_YEAR);
-                        setDropdownOpen((o) => !o);
-                      }}
-                      className={`flex items-center gap-1.5 px-5 py-2 rounded-lg text-sm font-semibold tracking-tight transition-all ${
-                        activeYear !== 'YTD'
-                          ? 'bg-[#0747A1] text-white shadow-md'
-                          : 'text-gray-400 hover:text-gray-700'
-                      }`}
-                    >
-                      {isHistorical ? activeYear : CURRENT_YEAR}
-                      <svg className="w-3 h-3 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
-
-                    {dropdownOpen && (
-                      <div className="absolute left-0 top-full mt-1 bg-white border border-gray-100 rounded-xl shadow-lg z-50 min-w-[100px] py-1 overflow-hidden">
-                        <button
-                          onClick={() => { setActiveYear(CURRENT_YEAR); setDropdownOpen(false); }}
-                          className={`w-full text-left px-4 py-2 text-sm font-medium transition-colors ${
-                            activeYear === CURRENT_YEAR ? 'text-[#0747A1] bg-[#0747A1]/5' : 'text-gray-600 hover:bg-gray-50'
-                          }`}
-                        >
-                          {CURRENT_YEAR}
-                        </button>
-                        {HISTORICAL_YEARS.map((year) => (
-                          <button
-                            key={year}
-                            onClick={() => { setActiveYear(year); setDropdownOpen(false); }}
-                            className={`w-full text-left px-4 py-2 text-sm font-medium transition-colors ${
-                              activeYear === year ? 'text-[#0747A1] bg-[#0747A1]/5' : 'text-gray-600 hover:bg-gray-50'
-                            }`}
-                          >
-                            {year}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                <div className="mb-6">
+                  <YearTabs activeYear={activeYear} onChange={setActiveYear} />
                 </div>
                 <h1 className="text-4xl lg:text-5xl font-semibold text-gray-900 tracking-tight leading-[1.15] mb-6">
                   Driving measurable change <br />
