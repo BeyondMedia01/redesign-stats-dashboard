@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { Sidebar } from '../components/Sidebar';
 import { StatCard } from '../components/StatCard';
 import { motion } from 'motion/react';
-import { MapPin, Users, BookOpen, GraduationCap, Calendar, TrendingUp } from 'lucide-react';
+import { MapPin, Users, BookOpen, GraduationCap, Calendar, TrendingUp, Award, CheckCircle2, Users2 } from 'lucide-react';
 
 type YearTab = 'YTD' | '2026' | '2025' | '2024' | '2023' | '2022' | '2021' | '2020' | '2019' | '2018';
 
@@ -74,6 +74,20 @@ const communityData: Record<string, {
   about: string;
   programs: string[];
   highlights: string[];
+  demographics: {
+    malePercent: number;
+    femalePercent: number;
+    avgAge: number;
+    ageGroups: { label: string; pct: number }[];
+  };
+  outcomes: {
+    employment6mo: number;
+    completionRate: number;
+    incomeChangePct: number;
+    incomeBefore: string;
+    incomeAfter: string;
+    followUp2yr: number;
+  };
 }> = {
   dzivarasekwa: {
     title: 'Dzivarasekwa',
@@ -84,6 +98,19 @@ const communityData: Record<string, {
     about: 'Dzivarasekwa was the starting point of our mission. With high youth unemployment and limited access to technology education, this community inspired the founding of our first Innovation Hub in 2018. Today it remains one of our most active hubs.',
     programs: ['Bootcamp Program', 'Youth Coding', 'Teacher Training', 'Outreach'],
     highlights: ['First Innovation Hub established here', 'Highest bootcamp graduation rate', 'Strong school partnerships', '3 active after-school clubs'],
+    demographics: {
+      malePercent: 44, femalePercent: 56, avgAge: 22,
+      ageGroups: [
+        { label: '13–17', pct: 28 },
+        { label: '18–24', pct: 42 },
+        { label: '25–34', pct: 20 },
+        { label: '35+',   pct: 10 },
+      ],
+    },
+    outcomes: {
+      employment6mo: 74, completionRate: 87,
+      incomeChangePct: 480, incomeBefore: '$3.0K', incomeAfter: '$17.4K', followUp2yr: 70,
+    },
   },
   kuwadzana: {
     title: 'Kuwadzana',
@@ -94,6 +121,19 @@ const communityData: Record<string, {
     about: 'Kuwadzana joined the network in 2019 and has grown rapidly, fuelled by strong community and school buy-in. The hub is known for its vibrant after-school Youth Coding clubs and active parent involvement.',
     programs: ['Bootcamp Program', 'Youth Coding', 'Teacher Training', 'Outreach'],
     highlights: ['Fastest-growing Youth Coding cohort', 'High parental engagement', '4 partnered primary schools', 'Annual community hackathon host'],
+    demographics: {
+      malePercent: 48, femalePercent: 52, avgAge: 19,
+      ageGroups: [
+        { label: '13–17', pct: 38 },
+        { label: '18–24', pct: 36 },
+        { label: '25–34', pct: 18 },
+        { label: '35+',   pct: 8 },
+      ],
+    },
+    outcomes: {
+      employment6mo: 69, completionRate: 82,
+      incomeChangePct: 440, incomeBefore: '$3.1K', incomeAfter: '$16.7K', followUp2yr: 65,
+    },
   },
   mufakose: {
     title: 'Mufakose',
@@ -104,6 +144,19 @@ const communityData: Record<string, {
     about: 'Mufakose is our largest hub by total beneficiary reach. The community has embraced teacher training as its primary vehicle for impact, with over 112 certified educators now delivering tech education across dozens of local schools.',
     programs: ['Bootcamp Program', 'Youth Coding', 'Teacher Training', 'Outreach'],
     highlights: ['Highest teacher training output', 'Largest beneficiary footprint', '12 partnered secondary schools', 'Monthly community meetups'],
+    demographics: {
+      malePercent: 38, femalePercent: 62, avgAge: 31,
+      ageGroups: [
+        { label: '13–17', pct: 18 },
+        { label: '18–24', pct: 30 },
+        { label: '25–34', pct: 34 },
+        { label: '35+',   pct: 18 },
+      ],
+    },
+    outcomes: {
+      employment6mo: 68, completionRate: 80,
+      incomeChangePct: 390, incomeBefore: '$3.4K', incomeAfter: '$16.7K', followUp2yr: 63,
+    },
   },
   'warren-park': {
     title: 'Warren Park',
@@ -114,6 +167,19 @@ const communityData: Record<string, {
     about: 'Warren Park is one of our newer hubs but has quickly distinguished itself through exceptional bootcamp graduate employment outcomes. The community has strong ties to local tech employers who actively hire from our program.',
     programs: ['Bootcamp Program', 'Youth Coding', 'Outreach'],
     highlights: ['Best employment outcomes (84%)', 'Active employer partnerships', '2 corporate sponsors', 'Rising female enrolment'],
+    demographics: {
+      malePercent: 46, femalePercent: 54, avgAge: 21,
+      ageGroups: [
+        { label: '13–17', pct: 22 },
+        { label: '18–24', pct: 50 },
+        { label: '25–34', pct: 22 },
+        { label: '35+',   pct: 6 },
+      ],
+    },
+    outcomes: {
+      employment6mo: 84, completionRate: 91,
+      incomeChangePct: 520, incomeBefore: '$2.9K', incomeAfter: '$18.0K', followUp2yr: 78,
+    },
   },
   kambuzuma: {
     title: 'Kambuzuma',
@@ -124,6 +190,19 @@ const communityData: Record<string, {
     about: 'Kambuzuma is our most recently established hub and is already showing impressive early momentum. With a strong focus on youth digital literacy and school integration, it is on track to become one of our highest-impact communities.',
     programs: ['Youth Coding', 'Outreach'],
     highlights: ['Fastest community growth rate', 'Strong school integration model', '8 partnered schools in year one', 'Youth-led coding club launched'],
+    demographics: {
+      malePercent: 50, femalePercent: 50, avgAge: 15,
+      ageGroups: [
+        { label: '13–17', pct: 62 },
+        { label: '18–24', pct: 28 },
+        { label: '25–34', pct: 8 },
+        { label: '35+',   pct: 2 },
+      ],
+    },
+    outcomes: {
+      employment6mo: 58, completionRate: 76,
+      incomeChangePct: 310, incomeBefore: '$2.8K', incomeAfter: '$11.5K', followUp2yr: 52,
+    },
   },
 };
 
@@ -259,6 +338,154 @@ export default function CommunityPage() {
                 No data available for {activeYear} — this hub was established in {community.foundedYear}.
               </div>
             )}
+          </section>
+
+          {/* Beneficiary Demographics */}
+          <section className="mb-16">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
+              <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Beneficiary Demographics</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+              {/* Gender */}
+              <div className="bg-white rounded-xl p-8 border border-gray-100">
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="p-2 bg-[#0747A1]/5 rounded-lg">
+                    <Users2 className="w-4 h-4 text-[#0747A1]" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Gender Split</span>
+                </div>
+                <div className="flex items-end gap-4 mb-6">
+                  <div>
+                    <div className="text-4xl font-bold text-[#0747A1]">{community.demographics.femalePercent}%</div>
+                    <p className="text-xs text-gray-500 mt-1">Female</p>
+                  </div>
+                  <div className="pb-1">
+                    <div className="text-2xl font-bold text-gray-400">{community.demographics.malePercent}%</div>
+                    <p className="text-xs text-gray-500 mt-1">Male</p>
+                  </div>
+                </div>
+                <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden flex">
+                  <div className="bg-[#0747A1] h-full" style={{ width: `${community.demographics.femalePercent}%` }} />
+                  <div className="bg-gray-300 h-full flex-1" />
+                </div>
+                <p className="text-xs text-gray-400 mt-3">Average participant age: <strong className="text-gray-700">{community.demographics.avgAge} yrs</strong></p>
+              </div>
+
+              {/* Age Groups */}
+              <div className="bg-white rounded-xl p-8 border border-gray-100">
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="p-2 bg-[#0747A1]/5 rounded-lg">
+                    <Users className="w-4 h-4 text-[#0747A1]" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Age Distribution</span>
+                </div>
+                <div className="space-y-4">
+                  {community.demographics.ageGroups.map(({ label, pct }) => (
+                    <div key={label}>
+                      <div className="flex justify-between text-xs text-gray-500 mb-1.5">
+                        <span>{label}</span>
+                        <strong className="text-gray-700">{pct}%</strong>
+                      </div>
+                      <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+                        <div className="bg-[#0747A1] h-full rounded-full" style={{ width: `${pct}%` }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Summary callout */}
+              <div className="bg-gradient-to-br from-[#0747A1] to-[#0a5ac7] rounded-xl p-8 text-white flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-[1.5px] text-blue-200">Community Profile</span>
+                  <div className="text-5xl font-bold mt-4 mb-2">{community.demographics.avgAge}</div>
+                  <p className="text-blue-100 text-sm">Average age of beneficiaries in {community.title}</p>
+                </div>
+                <div className="mt-8 space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-blue-200">Female representation</span>
+                    <strong>{community.demographics.femalePercent}%</strong>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-blue-200">Largest age cohort</span>
+                    <strong>{community.demographics.ageGroups.reduce((a, b) => a.pct > b.pct ? a : b).label}</strong>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          {/* Outcomes */}
+          <section className="mb-16">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
+              <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Outcomes & Sustainability</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+              <div className="bg-white rounded-xl p-6 border border-gray-100">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-2 bg-[#0747A1]/5 rounded-lg">
+                    <TrendingUp className="w-4 h-4 text-[#0747A1]" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Employment 6–12 Months</span>
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">{community.outcomes.employment6mo}%</div>
+                <p className="text-xs text-gray-500 mb-3">Still employed in tech roles post-graduation</p>
+                <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+                  <div className="bg-[#0747A1] h-full rounded-full" style={{ width: `${community.outcomes.employment6mo}%` }} />
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 border border-gray-100">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-2 bg-[#0747A1]/5 rounded-lg">
+                    <Award className="w-4 h-4 text-[#0747A1]" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Income Change</span>
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">+{community.outcomes.incomeChangePct}%</div>
+                <p className="text-xs text-gray-500 mb-3">Average income growth after program</p>
+                <div className="flex justify-between text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2">
+                  <span>Before: <strong className="text-gray-700">{community.outcomes.incomeBefore}/yr</strong></span>
+                  <span>→</span>
+                  <span>After: <strong className="text-[#0747A1]">{community.outcomes.incomeAfter}/yr</strong></span>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 border border-gray-100">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-2 bg-[#0747A1]/5 rounded-lg">
+                    <CheckCircle2 className="w-4 h-4 text-[#0747A1]" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Completion Rate</span>
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">{community.outcomes.completionRate}%</div>
+                <p className="text-xs text-gray-500 mb-3">Students completing the full curriculum</p>
+                <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+                  <div className="bg-[#0747A1] h-full rounded-full" style={{ width: `${community.outcomes.completionRate}%` }} />
+                </div>
+                <p className="text-xs text-gray-400 mt-2">{100 - community.outcomes.completionRate}% dropout — tracked & supported</p>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 border border-gray-100">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-2 bg-[#0747A1]/5 rounded-lg">
+                    <Users2 className="w-4 h-4 text-[#0747A1]" />
+                  </div>
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-[1px]">Long-term Follow-up</span>
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">{community.outcomes.followUp2yr}%</div>
+                <p className="text-xs text-gray-500 mb-3">Still in tech employment at 2-year mark</p>
+                <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+                  <div className="bg-[#0747A1] h-full rounded-full" style={{ width: `${community.outcomes.followUp2yr}%` }} />
+                </div>
+              </div>
+
+            </div>
           </section>
 
           {/* About + Highlights */}
