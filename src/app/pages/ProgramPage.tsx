@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useParams } from 'react-router';
 import { Sidebar } from '../components/Sidebar';
 import { StatCard } from '../components/StatCard';
 import { YearTabs, CURRENT_YEAR } from '../components/YearTabs';
 import type { YearTab } from '../components/YearTabs';
 import { motion } from 'motion/react';
-import { BookOpen, Users, TrendingUp, GraduationCap, Calendar, Target, MapPin } from 'lucide-react';
+import { BookOpen, Users, TrendingUp, GraduationCap, Calendar, Target, MapPin, User, UserCheck, MapPinned, GraduationCap as GradIcon } from 'lucide-react';
+import { SchoolPerformanceTable } from '../components/SchoolPerformanceTable';
+import { BootcampEnrollmentChart } from '../components/BootcampEnrollmentChart';
 
 type ProgramStats = { label: string; value: string; subtitle: string; trend?: string };
 
@@ -129,37 +131,46 @@ export default function ProgramPage() {
 
           {/* Header */}
           <header className="mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <span className="px-3 py-1 bg-[#0747A1]/5 text-[#0747A1] text-[10px] font-bold uppercase tracking-[2px] rounded-full border border-[#0747A1]/10">
-                  Program Overview
-                </span>
-                <div className="flex items-center gap-2 text-gray-400 text-xs">
-                  <Calendar className="w-3.5 h-3.5" />
-                  <span>{activeYear === 'YTD' ? 'Q1 2026 (YTD)' : `Full Year ${activeYear}`}</span>
+            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-10">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="px-3 py-1 bg-[#0747A1]/5 text-[#0747A1] text-[10px] font-bold uppercase tracking-[2px] rounded-full border border-[#0747A1]/10">
+                    Program Overview
+                  </span>
+                  <div className="flex items-center gap-2 text-gray-400 text-xs">
+                    <Calendar className="w-3.5 h-3.5" />
+                    <span>{activeYear === 'YTD' ? 'Q1 2026 (YTD)' : `Full Year ${activeYear}`}</span>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start gap-5 mb-6">
-                <div className="p-4 bg-[#0747A1] rounded-xl text-white shrink-0">
-                  {program.icon}
+                <div className="flex items-start gap-5">
+                  <div className="p-4 bg-[#0747A1] rounded-xl text-white shrink-0">
+                    {program.icon}
+                  </div>
+                  <div>
+                    <h1 className="text-4xl lg:text-5xl font-semibold text-gray-900 tracking-tight leading-tight mb-3">
+                      {program.title}
+                    </h1>
+                    <p className="text-gray-500 text-lg leading-relaxed max-w-2xl">
+                      {program.description}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h1 className="text-4xl lg:text-5xl font-semibold text-gray-900 tracking-tight leading-tight mb-3">
-                    {program.title}
-                  </h1>
-                  <p className="text-gray-500 text-lg leading-relaxed max-w-2xl">
-                    {program.description}
-                  </p>
-                </div>
-              </div>
+              </motion.div>
 
-              <YearTabs activeYear={activeYear} onChange={setActiveYear} />
-            </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="lg:pt-1 shrink-0"
+              >
+                <YearTabs activeYear={activeYear} onChange={setActiveYear} />
+              </motion.div>
+            </div>
           </header>
 
           {/* KPI Stats */}
@@ -191,49 +202,237 @@ export default function ProgramPage() {
             )}
           </section>
 
-          {/* About + Highlights */}
-          <section className="mb-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="bg-white rounded-xl p-8 border border-gray-100">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
-                  <h2 className="text-lg font-semibold text-gray-900 tracking-tight">About this Program</h2>
-                </div>
-                <p className="text-gray-600 leading-relaxed">{program.about}</p>
-              </div>
+          {/* Bootcamp — Enrollment Chart */}
+          {slug === 'bootcamp' && <BootcampEnrollmentChart />}
 
-              <div className="bg-white rounded-xl p-8 border border-gray-100">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
-                  <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Program Highlights</h2>
+          {/* About + Highlights */}
+          {slug !== 'youth-coding' && (
+            <section className="mb-16">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="bg-white rounded-xl p-8 border border-gray-100">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
+                    <h2 className="text-lg font-semibold text-gray-900 tracking-tight">About this Program</h2>
+                  </div>
+                  <p className="text-gray-600 leading-relaxed">{program.about}</p>
                 </div>
-                <ul className="space-y-3">
-                  {program.highlights.map((h) => (
-                    <li key={h} className="flex items-center gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#0747A1] shrink-0" />
-                      <span className="text-gray-600 text-sm">{h}</span>
-                    </li>
-                  ))}
-                </ul>
+
+                <div className="bg-white rounded-xl p-8 border border-gray-100">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
+                    <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Program Highlights</h2>
+                  </div>
+                  <ul className="space-y-3">
+                    {program.highlights.map((h) => (
+                      <li key={h} className="flex items-center gap-3">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#0747A1] shrink-0" />
+                        <span className="text-gray-600 text-sm">{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          )}
 
           {/* Communities */}
-          <section className="mb-16">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
-              <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Active Communities</h2>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              {program.communities.map((c) => (
-                <div key={c} className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-100 rounded-lg">
-                  <Target className="w-3.5 h-3.5 text-[#0747A1]" />
-                  <span className="text-sm text-gray-700 font-medium">{c}</span>
+          {slug !== 'youth-coding' && (
+            <section className="mb-16">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
+                <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Active Communities</h2>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                {program.communities.map((c) => (
+                  <div key={c} className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-100 rounded-lg">
+                    <Target className="w-3.5 h-3.5 text-[#0747A1]" />
+                    <span className="text-sm text-gray-700 font-medium">{c}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Youth Coding — exclusive sections */}
+          {slug === 'youth-coding' && (
+            <>
+              {/* Target Demographics */}
+              <section className="mb-16">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
+                  <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Target Demographics</h2>
                 </div>
-              ))}
-            </div>
-          </section>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                  {/* Age & Gender */}
+                  <div className="bg-white rounded-xl p-6 border border-gray-100">
+                    <div className="flex items-center gap-2 mb-5">
+                      <User className="w-4 h-4 text-[#0747A1]" />
+                      <h3 className="text-sm font-semibold text-gray-900 tracking-tight">Age / Gender</h3>
+                    </div>
+                    <div className="mb-5">
+                      <span className="text-xs text-gray-400 font-medium uppercase tracking-widest">Avg. Age</span>
+                      <div className="text-3xl font-bold text-[#0747A1] mt-1">21</div>
+                    </div>
+                    <div className="space-y-4">
+                      <div>
+                        <div className="flex justify-between mb-1.5">
+                          <div className="flex items-center gap-1.5">
+                            <User className="w-3.5 h-3.5 text-gray-400" />
+                            <span className="text-xs text-gray-500 font-medium">Male</span>
+                          </div>
+                          <span className="text-xs font-bold text-[#0747A1]">45%</span>
+                        </div>
+                        <div className="w-full bg-gray-50 rounded-full h-1.5 overflow-hidden">
+                          <div className="bg-[#0747A1] h-full rounded-full" style={{ width: '45%' }} />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between mb-1.5">
+                          <div className="flex items-center gap-1.5">
+                            <UserCheck className="w-3.5 h-3.5 text-gray-400" />
+                            <span className="text-xs text-gray-500 font-medium">Female</span>
+                          </div>
+                          <span className="text-xs font-bold text-[#60A5FA]">55%</span>
+                        </div>
+                        <div className="w-full bg-gray-50 rounded-full h-1.5 overflow-hidden">
+                          <div className="bg-[#60A5FA] h-full rounded-full" style={{ width: '55%' }} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Education Level */}
+                  <div className="bg-white rounded-xl p-6 border border-gray-100">
+                    <div className="flex items-center gap-2 mb-5">
+                      <GradIcon className="w-4 h-4 text-[#0747A1]" />
+                      <h3 className="text-sm font-semibold text-gray-900 tracking-tight">Education Level</h3>
+                    </div>
+                    <div className="space-y-3">
+                      {[
+                        { label: 'Primary School', pct: 35, rank: 'Lowest' },
+                        { label: 'Secondary School', pct: 45, rank: '' },
+                        { label: 'High School', pct: 20, rank: 'Highest' },
+                      ].map(({ label, pct, rank }) => (
+                        <div key={label}>
+                          <div className="flex justify-between mb-1.5">
+                            <span className="text-xs text-gray-500 font-medium">{label}</span>
+                            <div className="flex items-center gap-1.5">
+                              {rank && <span className="text-[10px] text-gray-400">{rank}</span>}
+                              <span className="text-xs font-bold text-[#0747A1]">{pct}%</span>
+                            </div>
+                          </div>
+                          <div className="w-full bg-gray-50 rounded-full h-1.5 overflow-hidden">
+                            <div className="bg-[#0747A1] h-full rounded-full" style={{ width: `${pct}%` }} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Geography */}
+                  <div className="bg-white rounded-xl p-6 border border-gray-100">
+                    <div className="flex items-center gap-2 mb-5">
+                      <MapPinned className="w-4 h-4 text-[#0747A1]" />
+                      <h3 className="text-sm font-semibold text-gray-900 tracking-tight">Geography</h3>
+                    </div>
+                    <p className="text-xs text-gray-400 mb-5">Highly urbanized student base</p>
+                    <div className="space-y-4">
+                      <div>
+                        <div className="flex justify-between mb-1.5">
+                          <span className="text-xs text-gray-500 font-medium">Urban</span>
+                          <span className="text-xs font-bold text-[#0747A1]">80%</span>
+                        </div>
+                        <div className="w-full bg-gray-50 rounded-full h-1.5 overflow-hidden">
+                          <div className="bg-[#0747A1] h-full rounded-full" style={{ width: '80%' }} />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between mb-1.5">
+                          <span className="text-xs text-gray-500 font-medium">Rural</span>
+                          <span className="text-xs font-bold text-[#60A5FA]">20%</span>
+                        </div>
+                        <div className="w-full bg-gray-50 rounded-full h-1.5 overflow-hidden">
+                          <div className="bg-[#60A5FA] h-full rounded-full" style={{ width: '20%' }} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* School Performance */}
+              <SchoolPerformanceTable />
+
+              {/* Outcomes — Survey Results */}
+              <section className="mb-16">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-1.5 h-6 bg-[#0747A1] rounded-full" />
+                  <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Outcomes</h2>
+                  <span className="text-xs text-gray-400 font-medium">Survey Results</span>
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                  {/* Teacher Responses */}
+                  <div className="bg-white rounded-xl p-6 border border-gray-100">
+                    <div className="flex items-center gap-2 mb-6">
+                      <Users className="w-4 h-4 text-[#0747A1]" />
+                      <h3 className="text-sm font-semibold text-gray-900 tracking-tight">Teacher Responses</h3>
+                    </div>
+                    <div className="space-y-5">
+                      {[
+                        { label: 'Improved critical thinking skills', yes: 55 },
+                        { label: 'Improved teamwork skills', yes: 45 },
+                        { label: 'Increased interest in technology', yes: 55 },
+                      ].map(({ label, yes }) => (
+                        <div key={label}>
+                          <div className="flex justify-between mb-2">
+                            <span className="text-xs text-gray-600 font-medium max-w-[220px]">{label}</span>
+                            <div className="flex items-center gap-3 shrink-0">
+                              <span className="text-[10px] text-[#0747A1] font-bold">Yes {yes}%</span>
+                              <span className="text-[10px] text-gray-400 font-medium">No {100 - yes}%</span>
+                            </div>
+                          </div>
+                          <div className="w-full bg-gray-50 rounded-full h-1.5 overflow-hidden">
+                            <div className="bg-[#0747A1] h-full rounded-full" style={{ width: `${yes}%` }} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Student Responses */}
+                  <div className="bg-white rounded-xl p-6 border border-gray-100">
+                    <div className="flex items-center gap-2 mb-6">
+                      <BookOpen className="w-4 h-4 text-[#0747A1]" />
+                      <h3 className="text-sm font-semibold text-gray-900 tracking-tight">Student Responses</h3>
+                    </div>
+                    <div className="space-y-5">
+                      {[
+                        { label: 'Enjoyment / Fun in coding classes', yes: 55 },
+                        { label: 'Desire to continue learning coding', yes: 45 },
+                        { label: 'Likely to recommend lessons to friends', yes: 55 },
+                      ].map(({ label, yes }) => (
+                        <div key={label}>
+                          <div className="flex justify-between mb-2">
+                            <span className="text-xs text-gray-600 font-medium max-w-[220px]">{label}</span>
+                            <div className="flex items-center gap-3 shrink-0">
+                              <span className="text-[10px] text-[#0747A1] font-bold">Yes {yes}%</span>
+                              <span className="text-[10px] text-gray-400 font-medium">No {100 - yes}%</span>
+                            </div>
+                          </div>
+                          <div className="w-full bg-gray-50 rounded-full h-1.5 overflow-hidden">
+                            <div className="bg-[#0747A1] h-full rounded-full" style={{ width: `${yes}%` }} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+              </section>
+            </>
+          )}
 
         </div>
       </main>
